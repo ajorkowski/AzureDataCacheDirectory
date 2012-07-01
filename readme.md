@@ -32,6 +32,14 @@ var writer = new IndexWriter(directory, analyser, Lucene.Net.Index.IndexWriter.M
 ...
 
 // Query from lucene as per normal
-var searcher = new IndexSearcher(_directory, true);
+var searcher = new IndexSearcher(directory, true);
 ...
 ```
+
+## What's the point?
+I use this as a backend for my bounded search set. I know it will fit comfortably inside the cache and 
+it won't get any bigger. This situation is perfect for usage in the cache as we can utilise the compute power
+we have at our disposal and don't have to worry about blob storage etc...
+
+## License
+MIT Licensed
