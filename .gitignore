@@ -1,0 +1,11 @@
+bin/
+obj/
+packages/
+node_modules/
+Backup/
+_UpgradeReport_Files/
+TestResults/
+UpgradeLog.XML
+*.suo
+*.ncrunchproject
+*.ncrunchsolution
