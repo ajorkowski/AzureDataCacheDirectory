@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/ajorkowski/AzureDataCacheDirectory</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>First release of the Data Cache directory</releaseNotes>
+    <releaseNotes>Added error catching on Clear All Indexes in the situations where the indexes don't exist at all</releaseNotes>
     <copyright>Copyright 2012</copyright>
     <tags>Azure Lucene DataCache</tags>
   </metadata>

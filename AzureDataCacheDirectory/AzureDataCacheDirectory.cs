@@ -39,7 +39,19 @@ namespace Lucene.Net.Store.Azure
 
         public void ClearAllIndexes()
         {
-            _persistantCache.ClearRegion(_cacheRegion);
+            try
+            {
+                _persistantCache.ClearRegion(_cacheRegion);
+            }
+            catch (DataCacheException e)
+            {
+                // Error code 5 means the region doesn't exist... which is fine!
+                if (e.ErrorCode != 5)
+                {
+                    // Otherwise keep bubbling the error up
+                    throw;
+                }
+            }
         }
 
         public override IndexOutput CreateOutput(string name)
