@@ -26,14 +26,14 @@ namespace Lucene.Net.Store.Azure
             _stream = new MemoryStream();
         }
 
-        public override long GetFilePointer()
+        public override long FilePointer
         {
-            return _stream.Position;
+            get { return _stream.Position; }
         }
 
-        public override long Length()
+        public override long Length
         {
-            return _stream.Length;
+            get { return _stream.Length; }
         }
 
         public override void Seek(long pos)
@@ -56,15 +56,24 @@ namespace Lucene.Net.Store.Azure
             _stream.Flush();
         }
 
-        public override void Close()
+        private bool _disposed;
+        protected override void Dispose(bool disposing)
         {
-            _stream.Flush();
-            var data = _stream.ToArray();
-            _stream.Dispose();
-            var now = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-            _persistantCache.Put(_name, data, _cacheRegion);
-            _persistantCache.Put(_modifiedName, now, new List<DataCacheTag> { _modifiedTag }, _cacheRegion);
-            _persistantCache.Put(_sizeName, (long)data.Length, _cacheRegion);
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    _stream.Flush();
+                    var data = _stream.ToArray();
+                    _stream.Dispose();
+                    var now = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+                    _persistantCache.Put(_name, data, _cacheRegion);
+                    _persistantCache.Put(_modifiedName, now, new List<DataCacheTag> { _modifiedTag }, _cacheRegion);
+                    _persistantCache.Put(_sizeName, (long)data.Length, _cacheRegion);
+                }
+
+                _disposed = true;
+            }
         }
     }
 }

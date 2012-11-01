@@ -93,22 +93,10 @@ namespace Lucene.Net.Store.Azure
             return (long)modified;
         }
 
-        [Obsolete]
-        public override void RenameFile(string from, string to)
-        {
-            throw new NotImplementedException();
-        }
-
         public override void TouchFile(string name)
         {
             var now = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
             _persistantCache.Put(_modifiedNamespace + name, now, new List<DataCacheTag> { _modifiedTag }, _cacheRegion);
-        }
-
-        [Obsolete]
-        public override string[] List()
-        {
-            throw new NotImplementedException();
         }
 
         public override string[] ListAll()
@@ -120,14 +108,9 @@ namespace Lucene.Net.Store.Azure
             return files;
         }
 
-        public override void Close()
+        protected override void Dispose(bool disposing)
         {
-            // Do nothing for now
-        }
-
-        public override void Dispose()
-        {
-            Close();
+            // Don't have anything to dispose
         }
     }
 }

@@ -21,9 +21,12 @@ namespace Lucene.Net.Store.Azure
             _stream = new MemoryStream(streamData, false);
         }
 
-        public override long GetFilePointer()
+        public override long FilePointer
         {
-            return _stream.Position;
+            get
+            {
+                return _stream.Position;
+            }
         }
 
         public override long Length()
@@ -46,16 +49,25 @@ namespace Lucene.Net.Store.Azure
             _stream.Seek(pos, SeekOrigin.Begin);
         }
 
-        public override void Close()
-        {
-            _stream.Close();
-        }
-
         public override object Clone()
         {
             var result = new AzureDataCacheIndexInput(_name, _cacheRegion, _persistantCache);
-            result.Seek(GetFilePointer());
+            result.Seek(FilePointer);
             return result;
+        }
+
+        private bool _disposed;
+        protected override void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    _stream.Close();
+                }
+
+                _disposed = true;
+            }
         }
     }
 }

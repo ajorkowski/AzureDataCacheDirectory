@@ -4,6 +4,8 @@ This is an implementation of the Lucene Directory so that it's backend is the ne
 
 NOTE: It must use the preview version of the local cache (ie not the external azure cache) so that regions are available
 
+Updated to use V2 of the azure libraries and V3 of lucene
+
 ## Get it
 
 Install-Package AzureDataCacheDirectory
