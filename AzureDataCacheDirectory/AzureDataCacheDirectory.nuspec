@@ -10,8 +10,8 @@
     <projectUrl>https://github.com/ajorkowski/AzureDataCacheDirectory</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Added error catching on Clear All Indexes in the situations where the indexes don't exist at all</releaseNotes>
-    <copyright>Copyright 2012</copyright>
+    <releaseNotes>Updated to use latest versions of deps</releaseNotes>
+    <copyright>Copyright 2013</copyright>
     <tags>Azure Lucene DataCache</tags>
   </metadata>
 </package>
